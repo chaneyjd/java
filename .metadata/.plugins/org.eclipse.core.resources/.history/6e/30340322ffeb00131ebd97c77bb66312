@@ -1,0 +1,13 @@
+package com.example;
+
+public class TaskOne implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Executing Task One " + Thread.currentThread().getId());
+        try {
+            Thread.sleep((long) (Math.random()*5000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}

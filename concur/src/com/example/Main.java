@@ -9,11 +9,15 @@ public class Main {
 		MultiTaskExecutor multi = new MultiTaskExecutor();
 		
         List<Runnable> taskGroup = new ArrayList<Runnable>();
-        taskGroup.add(new TaskOne());
-        taskGroup.add(new TaskTwo());
-        taskGroup.add(new TaskThree());
 
-        multi.getQueue().add(new MultiRunnable(taskGroup));
+        for (int x = 0; x < 100; x++) {
+            taskGroup.add(new TaskOne());        	
+        }
+        
+//        taskGroup.add(new TaskTwo());
+//        taskGroup.add(new TaskThree());
+
+        multi.getQueue().offer(new MultiRunnable(taskGroup));
 	}
 
 }

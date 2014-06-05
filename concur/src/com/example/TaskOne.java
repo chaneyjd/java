@@ -3,9 +3,9 @@ package com.example;
 public class TaskOne implements Runnable {
     @Override
     public void run() {
-        System.out.println("Executing Task One " + Thread.currentThread().getId());
         try {
-            Thread.sleep(2000);
+            Thread.sleep((long) (Math.random()*10000));
+            System.out.println("Executing Task One " + Thread.currentThread().getId());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
