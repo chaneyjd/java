@@ -1,0 +1,2 @@
+2014-06-13 21:30:18,140  WARN [main] - ImplicitHighlightingPresenter - Timeout while waiting for `askLoadedTyped` during implicit highlighting.
+2014-06-13 21:41:20,540  WARN [ModalContext] - ImplicitHighlightingPresenter - Timeout while waiting for `askLoadedTyped` during implicit highlighting.

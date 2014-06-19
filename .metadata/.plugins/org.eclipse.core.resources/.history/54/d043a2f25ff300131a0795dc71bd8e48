@@ -1,0 +1,39 @@
+package com.citigroup.cdcla.jfp.citialert.executors;
+
+import java.util.concurrent.BlockingQueue;
+
+public abstract class JEAHandler implements Runnable {
+
+	private JEAMessage _message = null;
+	private BlockingQueue<JEAMessage> _queue = null;
+	
+	public void run() {
+		while (!Thread.interrupted()) {
+			_message = _queue.poll();
+			// handle interrupts (shutdown / stop / etc)
+			handleMessage();
+		}
+	}
+	
+    public  void setQueue(BlockingQueue<JEAMessage> queue) {
+    	_queue = queue;
+    	} 
+
+	public abstract void handleMessage();
+	
+	// while (true) {
+	// Read from blocking queue
+	// }
+	
+//	public static  JEAHandler getInstance(){
+//		if (handler == null){
+//			synchronized (JEAHandler.class) {
+//				if (handler == null){
+//					handler = new JEAHandler();
+//				}
+//			}
+//		}
+//		return handler;
+//	}
+	
+}

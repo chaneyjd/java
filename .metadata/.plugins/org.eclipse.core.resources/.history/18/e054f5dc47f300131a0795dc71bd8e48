@@ -1,0 +1,45 @@
+package com.a.b.c;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.citigroup.cdcla.jfp.citialert.executors.JEAExecutor;
+import com.citigroup.cdcla.jfp.citialert.executors.JEAHandler;
+import com.citigroup.cdcla.jfp.citialert.executors.JEAMultiHandler;
+
+public class Client {
+	public static void main(String[] args) {
+		JEAExecutor jeaExecutor = JEAExecutor.getInstance();
+		jeaExecutor.initialize(new MyHandler());
+
+//		List<MyMessage> list = new ArrayList<MyMessage>();
+//		
+//		list.add(new MyMessage());
+//		list.add(new MyMessage());
+//		list.add(new MyMessage());
+//		list.add(new MyMessage());
+//		list.add(new MyMessage());
+//		list.add(new MyMessage());
+//		list.add(new MyMessage());
+//		
+//		jeaExecutor.getQueue().offer(new JEAMultiHandler(list));
+		
+		MyMessage m = new MyMessage();
+		m.setCustomerId((long) 10101);
+		
+		jeaExecutor.getQueue().offer(m);
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) { }
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) { }
+		
+		jeaExecutor.getQueue().offer(new MyHandler());
+		
+		//jeaExecutor.shutdown();
+		// gracefull / interrupt
+	}
+}

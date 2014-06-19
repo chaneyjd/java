@@ -2,4 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.concurrent.ExecutorService"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.citigroup.cdcla.jfp.citialert.executors.JEAMessage"/>
 </qualifiedTypeNameHistroy>
