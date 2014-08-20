@@ -7,6 +7,9 @@
 	<buildSpec>
 	</buildSpec>
 	<natures>
+<<<<<<< HEAD
 		<nature>org.eclipse.rse.ui.remoteSystemsTempNature</nature>
+=======
+>>>>>>> origin/master
 	</natures>
 </projectDescription>

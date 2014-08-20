@@ -1,0 +1,50 @@
+package com.citigroup.cdcla.jfp.citialert.executors;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class JEAExecutor {
+
+    private BlockingQueue<JEAMessage> worksQueue; 
+    private RejectedExecutionHandler rejectionHandler; 
+    private ThreadPoolExecutor threadPoolExecutor;
+    //ExecutorService executorService = null;
+    private static JEAExecutor executor;
+    
+    private final int MAX_THREADS = 3;
+        
+        private JEAExecutor() { 
+        
+        }
+        
+        public static  JEAExecutor getInstance(){
+    		if (executor == null){
+    			synchronized (JEAExecutor.class) {
+    				if (executor == null){
+    					executor = new JEAExecutor();
+    				}
+    			}
+    		}
+    		return executor;
+    	}
+        
+        public void initialize(JEAHandler handler){
+           worksQueue = new ArrayBlockingQueue<JEAMessage>(10); 
+           rejectionHandler = new RejectedExecutionHandelerImpl(); 
+           threadPoolExecutor = new ThreadPoolExecutor(MAX_THREADS, MAX_THREADS, 1, TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(MAX_THREADS), rejectionHandler); 
+           threadPoolExecutor.prestartAllCoreThreads(); 
+         //   executorService = Executors.newFixedThreadPool(10);
+        }
+        
+//        public void execute(List<JEAHandler> listHandler){
+//        	for(JEAHandler handler : listHandler){
+//            	executorService.execute(handler);
+//            }
+        
+    public  BlockingQueue<JEAMessage> getQueue() { 
+    	return worksQueue; 
+    	} 
+}

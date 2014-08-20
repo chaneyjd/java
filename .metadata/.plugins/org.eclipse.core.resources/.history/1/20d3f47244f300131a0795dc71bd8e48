@@ -1,0 +1,31 @@
+package com.citigroup.cdcla.jfp.citialert.executors;
+
+public abstract class JEAHandler implements Runnable {
+
+	private JEAMessage
+	public void run() {
+		// while (true) {
+		// read queue - get message
+		// handle interrupts (shutdown / stop / etc)
+		this.handleMessage();
+		// }
+	}
+
+	public abstract void handleMessage();
+	
+	// while (true) {
+	// Read from blocking queue
+	// }
+	
+//	public static  JEAHandler getInstance(){
+//		if (handler == null){
+//			synchronized (JEAHandler.class) {
+//				if (handler == null){
+//					handler = new JEAHandler();
+//				}
+//			}
+//		}
+//		return handler;
+//	}
+	
+}
