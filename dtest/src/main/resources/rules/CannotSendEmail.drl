@@ -1,0 +1,13 @@
+package com.sample
+ 
+import com.sample.DroolsMessage;
+import com.sample.DroolsTimer;
+import com.sample.DroolsUtilities;
+ 
+rule "CannotSendEmail"
+	when
+		DroolsCustomer (emailAddress == null)
+		m : DroolsMessage( flowStatus == DroolsMessage.EMAIL )
+	then
+		System.out.println("No Email on file, please forward to CSR");
+end

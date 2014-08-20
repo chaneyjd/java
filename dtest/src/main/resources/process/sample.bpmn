@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <process processType="Private" isExecutable="true" id="com.sample.bpmn.hello" name="sample" >
+
+    <extensionElements>
+     <tns:import name="org.kie.api.KieServices" />
+     <tns:import name="org.kie.api.runtime.KieContainer" />
+     <tns:import name="org.kie.api.runtime.KieSession" />
+     <tns:import name="com.sample.DroolsMessage" />
+     <tns:import name="com.sample.DroolsTimer" />
+     <tns:import name="com.sample.DroolsCustomer" />
+    </extensionElements>
+    <!-- nodes -->
+    <startEvent id="_jbpm-unique-1" name="Start"  isInterrupting="false">
+    </startEvent>
+    <scriptTask id="_jbpm-unique-2" name="Script" >
+      <script>System.out.println("hello");</script>
+    </scriptTask>
+    <intermediateCatchEvent id="_jbpm-unique-4" name="Timer" >
+      <timerEventDefinition>
+        <timeDuration xsi:type="tFormalExpression">5000</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <scriptTask id="_jbpm-unique-7" name="Script" scriptFormat="http://www.java.com/java" >
+      <script>        try {
+            // load up the knowledge base
+	        KieServices ks = KieServices.Factory.get();
+    	    KieContainer kContainer = ks.getKieClasspathContainer();
+        	KieSession kSession = kContainer.newKieSession("ksession-rules");
+
+            // go !
+            DroolsMessage message = new DroolsMessage();
+            message.setFlowStatus(DroolsMessage.PUSH);
+            message.setReplyStatus(DroolsMessage.NOTREPLIED);
+            DroolsCustomer customer = new DroolsCustomer();
+            customer.setPushAddress("abcc830203849");
+            customer.setSMSAddress("5555555555");
+            customer.setSMSApproved(true);
+            kSession.insert(message);
+            kSession.insert(customer);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+</script>
+    </scriptTask>
+    <endEvent id="_jbpm-unique-14" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <businessRuleTask id="_jbpm-unique-35" name="Rule" g:ruleFlowGroup="com.sample" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </businessRuleTask>
+
+    <!-- connections -->
+    <sequenceFlow id="_jbpm-unique-1-_jbpm-unique-2" sourceRef="_jbpm-unique-1" targetRef="_jbpm-unique-2" />
+    <sequenceFlow id="_jbpm-unique-2-_jbpm-unique-4" sourceRef="_jbpm-unique-2" targetRef="_jbpm-unique-4" />
+    <sequenceFlow id="_jbpm-unique-35-_jbpm-unique-14" sourceRef="_jbpm-unique-35" targetRef="_jbpm-unique-14" />
+    <sequenceFlow id="_jbpm-unique-4-_jbpm-unique-35" sourceRef="_jbpm-unique-4" targetRef="_jbpm-unique-35" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.sample.bpmn.hello" >
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-1" >
+        <dc:Bounds x="100" y="100" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-2" >
+        <dc:Bounds x="143" y="392" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-4" >
+        <dc:Bounds x="415" y="382" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-7" >
+        <dc:Bounds x="731" y="163" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-14" >
+        <dc:Bounds x="304" y="227" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-35" >
+        <dc:Bounds x="803" y="388" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-1-_jbpm-unique-2" >
+        <di:waypoint x="124" y="124" />
+        <di:waypoint x="183" y="416" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-2-_jbpm-unique-4" >
+        <di:waypoint x="183" y="416" />
+        <di:waypoint x="439" y="406" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-35-_jbpm-unique-14" >
+        <di:waypoint x="843" y="412" />
+        <di:waypoint x="328" y="251" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-4-_jbpm-unique-35" >
+        <di:waypoint x="439" y="406" />
+        <di:waypoint x="843" y="412" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

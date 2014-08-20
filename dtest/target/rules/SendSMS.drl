@@ -1,0 +1,21 @@
+package com.sample
+ 
+import com.sample.DroolsMessage;
+import com.sample.DroolsTimer;
+import com.sample.DroolsUtilities;
+ 
+rule "SendSMS"
+    when
+    	DroolsCustomer( isSMSApproved() == true );
+    	DroolsCustomer( SMSAddress != null, address : SMSAddress )
+        m : DroolsMessage( flowStatus == DroolsMessage.SMS)
+        DroolsMessage( replyStatus == DroolsMessage.NOTREPLIED)
+    then
+    	DroolsUtilities du = new DroolsUtilities();
+    	du.sendSMS(address);
+        DroolsTimer t = new DroolsTimer();
+        t.setLength(5000);
+        t.pause();
+        m.setFlowStatus(DroolsMessage.EMAIL);
+        update(m);
+end

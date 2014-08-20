@@ -1,0 +1,13 @@
+Tue Aug 19 22:38:11 EDT 2014
+ERROR org.eclipse.rse.ui  Error creating temp project
+org.eclipse.core.internal.resources.ResourceException: Failed to read the project description file (.project) for 'RemoteSystemsTempFiles'.  The file has been changed on disk, and it now contains invalid information.  The project will not function properly until the description file is restored to a valid state.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:860)
+	at org.eclipse.core.internal.resources.Project.updateDescription(Project.java:1428)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:308)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:269)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:262)
+	at org.eclipse.rse.internal.files.ui.resources.SystemRemoteEditManager.createRemoteEditProject(SystemRemoteEditManager.java:344)
+	at org.eclipse.rse.internal.files.ui.resources.SystemRemoteEditManager.getRemoteEditProject(SystemRemoteEditManager.java:284)
+	at org.eclipse.rse.internal.files.ui.Activator$InitRemoteEditJob.run(Activator.java:72)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+--------------------------------------------

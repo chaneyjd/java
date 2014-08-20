@@ -1,0 +1,14 @@
+package com.sample
+ 
+import com.sample.DroolsMessage;
+import com.sample.DroolsTimer;
+import com.sample.DroolsUtilities;
+ 
+rule "CannotSendSMS"
+	when
+		DroolsCustomer( SMSAddress == null)
+		m : DroolsMessage(flowStatus == DroolsMessage.SMS)
+	then
+        m.setFlowStatus(DroolsMessage.SMS);
+        update(m);
+end

@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-GitRepositoriesView.GitDirectories=C\:\\Users\\Jason\\Documents\\GitHub\\java\\.git;
-=======
-GitRepositoriesView.GitDirectories=/Users/jasonchaney/git/java/.git\:
->>>>>>> origin/master
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=origin/master
+GitRepositoriesView.GitDirectories=C\:\\Users\\Jason\\Documents\\GitHub\\java\\.git;/Users/jasonchaney/git/java/.git\:;
 eclipse.preferences.version=1
